@@ -1,15 +1,24 @@
 <template>
   <div id="app">
-    <router-view></router-view>
+    <app-header></app-header>
+    <div class="container">
+      <router-view></router-view>
+    </div>
   </div>
 </template>
 
 <script>
+import Header from "./components/Header.vue";
 export default {
   name: "app",
-  components: {}
+  components: {
+    appHeader: Header
+  }
 };
 </script>
 
 <style>
+.container {
+  padding: 20px;
+}
 </style>

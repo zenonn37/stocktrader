@@ -4,6 +4,7 @@ import VuikitIcons from "@vuikit/icons";
 import "@vuikit/theme";
 import VueRouter from "vue-router";
 import { routes } from "./routes";
+import store from "./store/store";
 
 Vue.use(VueRouter);
 Vue.use(Vuikit);
@@ -18,5 +19,6 @@ const router = new VueRouter({
 });
 new Vue({
   router,
+  store,
   render: h => h(App)
 }).$mount("#app");

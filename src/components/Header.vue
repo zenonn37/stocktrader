@@ -11,9 +11,7 @@ t<template>
       <router-link to="/stocks" tag="li">
         <a>Stocks</a>
       </router-link>
-      <router-link to="/stocks" tag="li" slot="right">
-        <a>End of Day</a>
-      </router-link>
+      <vk-nav-item @click="endDay" title="End of Day"></vk-nav-item>
 
       <vk-navbar-nav-dropdown title="Save/Load">
         <vk-navbar-nav-dropdown-nav>
@@ -27,6 +25,7 @@ t<template>
 </template>
 
 <script>
+import { mapActions } from "vuex";
 export default {
   computed: {
     funds() {
@@ -34,6 +33,10 @@ export default {
     }
   },
   methods: {
+    ...mapActions(["randomizeStocks"]),
+    endDay() {
+      this.randomizeStocks();
+    },
     save() {
       console.log("saved");
     },

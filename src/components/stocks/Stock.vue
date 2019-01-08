@@ -8,12 +8,12 @@
         <a href="#">dolor</a> sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua.
       </p>
       <div>
-        <input type="number" placeholder="Quanity" class="uk-input" v-model="quanity">
+        <input type="number" placeholder="Quantity" class="uk-input" v-model="quantity">
         <br>
         <vk-button
           type="secondary"
           @click="buyStock"
-          :disabled=" insufficientFunds || quanity <= 0"
+          :disabled=" insufficientFunds ||quantity <= 0"
         >{{insufficientFunds ? 'Insufficient Funds':'Buy Stock'}}</vk-button>
       </div>
       <div></div>
@@ -26,7 +26,7 @@ export default {
   props: ["stock"],
   data() {
     return {
-      quanity: 0
+      quantity: 0
     };
   },
   computed: {
@@ -34,7 +34,7 @@ export default {
       return this.$store.getters.funds;
     },
     insufficientFunds() {
-      return this.quanity * this.stock.price > this.funds;
+      return this.quantity * this.stock.price > this.funds;
     }
   },
   methods: {
@@ -42,11 +42,11 @@ export default {
       const order = {
         stockId: this.stock.id,
         stockPrice: this.stock.price,
-        quanity: parseInt(this.quanity)
+        quantity: parseInt(this.quantity)
       };
       console.log(order);
       this.$store.dispatch("buyStock", order);
-      this.quanity = 0;
+      this.quantity = 0;
     }
   }
 };

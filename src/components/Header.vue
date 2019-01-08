@@ -14,6 +14,7 @@ t<template>
       <router-link to="/stocks" tag="li" slot="right">
         <a>End of Day</a>
       </router-link>
+
       <vk-navbar-nav-dropdown title="Save/Load">
         <vk-navbar-nav-dropdown-nav>
           <vk-nav-item @click="save" title="Save" active></vk-nav-item>
@@ -21,11 +22,17 @@ t<template>
         </vk-navbar-nav-dropdown-nav>
       </vk-navbar-nav-dropdown>
     </vk-navbar-nav>
+    <li>Funds:{{funds | currency}}</li>
   </vk-navbar>
 </template>
 
 <script>
 export default {
+  computed: {
+    funds() {
+      return this.$store.getters.funds;
+    }
+  },
   methods: {
     save() {
       console.log("saved");

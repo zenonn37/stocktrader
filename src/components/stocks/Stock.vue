@@ -9,7 +9,12 @@
       </p>
       <div>
         <input type="number" placeholder="Quanity" class="uk-input" v-model="quanity">
-        <vk-button @click="buyStock" :disabled="quanity <= 0 || !Number.isInteger">Buy</vk-button>
+        <br>
+        <vk-button
+          type="secondary"
+          @click="buyStock"
+          :disabled=" insufficientFunds || quanity <= 0"
+        >{{insufficientFunds ? 'Insufficient Funds':'Buy Stock'}}</vk-button>
       </div>
       <div></div>
     </vk-card>
@@ -24,12 +29,20 @@ export default {
       quanity: 0
     };
   },
+  computed: {
+    funds() {
+      return this.$store.getters.funds;
+    },
+    insufficientFunds() {
+      return this.quanity * this.stock.price > this.funds;
+    }
+  },
   methods: {
     buyStock() {
       const order = {
         stockId: this.stock.id,
         stockPrice: this.stock.price,
-        quanity: this.quanity
+        quanity: parseInt(this.quanity)
       };
       console.log(order);
       this.$store.dispatch("buyStock", order);

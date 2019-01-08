@@ -9,6 +9,9 @@ import store from "./store/store";
 Vue.use(VueRouter);
 Vue.use(Vuikit);
 Vue.use(VuikitIcons);
+Vue.filter("currency", value => {
+  return "$" + value.toLocaleString();
+});
 import App from "./App.vue";
 
 Vue.config.productionTip = false;
